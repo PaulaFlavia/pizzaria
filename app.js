@@ -1,5 +1,6 @@
 // Importando o express
 const express = require('express');
+const RegistraHoraDeAcesso = require('./middlewares/RegistraHoraDeAcesso');
 
 // Criando a aplicação express
 const app = express();
@@ -12,9 +13,14 @@ app.set('view engine','ejs');
 //# seja o padrão
 // app.set('views',"caminho para pasta views")
 
+// Declaração de middlewares globais
+app.use(RegistraHoraDeAcesso);
+
 // Verificando se a requisição é para um arquivo da pasta public
 // caso seja, mande esse arquivo
 app.use(express.static("public"));
+
+
 
 // Importando o roteador que lida com as rotas de pizza
 const PizzasRouter = require('./routes/PizzasRouter')
@@ -23,7 +29,7 @@ const PizzasRouter = require('./routes/PizzasRouter')
 app.use('/pizzas', PizzasRouter);
 
 // Adicionando uma rota na aplicação que responde para usuário diretamente... (isso não é MVC, mas funciona)
-app.get('/', (req,res) => {res.send("Olá, visitante")})
+app.get('/', (req,res) => {res.send("Olá, visitante")});
 
 // Pondo a aplicação para rodar escutando na porta 3000
 app.listen(3000, ()=>{console.log("servidor rodando na porta 3000")});
