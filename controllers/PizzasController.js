@@ -5,7 +5,11 @@ const pizzas = require('../database/pizzas.json');
 module.exports = {
 
     index: (req, res) => {
-        res.render('index.ejs',{ pizzas });
+        let quantidade = 0;
+        if(req.session.pizzas){
+            quantidade = req.session.pizzas.length;
+        }
+        res.render('index.ejs',{ pizzas, quantidade });
     },
 
     show: (req, res) => {
@@ -21,11 +25,36 @@ module.exports = {
 
     search: (req, res) => {
         // Levantar o trecho que está sendo buscado (req.query.q)
+        let quantidade = 0;
+        if(req.session.pizzas){
+            quantidade = req.session.pizzas.length;
+        };
+
         let termoBuscado = req.query.q;
         // Filtrar as pizzas para obter somente as pizzas com esse trecho
-        let pizzasFiltradas = pizzas.filter(p => p.nome.toLowerCase().includes(termoBuscado.toLowerCase()))
+        let pizzasFiltradas = pizzas.filter(p => p.nome.toLowerCase().includes(termoBuscado.toLowerCase()));
         // retornar a view index.ejs, passando para ela somente as pizzas filtradas
-        res.render('index.ejs', { pizzas: pizzasFiltradas });
-    }
+        res.render('index.ejs', { pizzas: pizzasFiltradas, quantidade });
+    },
 
+    addCart: (req, res) => {
+        if(req.session.pizzas){
+            req.session.pizzas.push(req.body.aEscolhida);
+        } else {
+        req.session.pizzas = [req.body.aEscolhida];
+    }
+    res.redirect('/pizzas');
+    console.log(req.session);
+},
+    showCart: (req, res) => {
+    let getPizzaById = (id) => {
+        let pizzaEncontrada = pizzas.find(p => p.id == id);
+        return pizzaEncontrada;
+    }
+        let pizzasDoCarrinho = req.session.pizzas.map(getPizzaById);
+        res.render('cart.ejs', {pizzasDoCarrinho});
+    }
+    //showCart: (req,res) =>{
+    //let pizzaDoCarrinho = req.session.pizza.map(id => pizzas.find(p => p.id == id))
+    //}
 }

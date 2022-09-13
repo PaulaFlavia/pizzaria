@@ -1,6 +1,8 @@
 // Importando o express
 const express = require('express');
-const RegistraHoraDeAcesso = require('./middlewares/RegistraHoraDeAcesso');
+const session = require('express-session');
+
+const RegistraHoraDeAcesso = require('./midllewares/RegistraHoraDeAcesso');
 
 // Criando a aplicação express
 const app = express();
@@ -13,12 +15,21 @@ app.set('view engine','ejs');
 //# seja o padrão
 // app.set('views',"caminho para pasta views")
 
-// Declaração de middlewares globais
-app.use(RegistraHoraDeAcesso);
-
+//midlleware global que configura o cookie da session
+app.use(
+    session({
+        secret: 'CHAVE-SECRETA',
+        resave: false,
+        saveUninitialized: true
+    })
+);
 // Verificando se a requisição é para um arquivo da pasta public
 // caso seja, mande esse arquivo
 app.use(express.static("public"));
+
+
+app.use(express.urlencoded({ extended: false }));
+// Declaração de middlewares globais
 
 
 

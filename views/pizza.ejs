@@ -7,8 +7,19 @@
     <title>Document</title>
 </head>
 <body>
-    <h1><%= pizza.nome %></h1>
-    <h2><%= pizza.preco %></h2>
-    <p><%= pizza.ingredientes %></p>
+    <link rel="stylesheet" href="/css/pizza.css">
+    <main>
+
+        <h1><%= pizza.nome %></h1>
+        <h2>R$ <%= pizza.preco %></h2>
+        <p><%= pizza.ingredientes %></p>
+        <img src="<%= pizza.img %>" alt="<%= pizza.nome %>"/>
+       
+        <button>+ Add</button>
+      
+        <a href="/pizzas/<%= pizza.id -1 %>" class="prev">&lt;</a>
+        <a href="/pizzas/<%= pizza.id +1 %>" class="next">&gt;</a>
+      
+    </main>
 </body>
 </html>
