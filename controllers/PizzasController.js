@@ -51,10 +51,13 @@ module.exports = {
         let pizzaEncontrada = pizzas.find(p => p.id == id);
         return pizzaEncontrada;
     }
-        let pizzasDoCarrinho = req.session.pizzas.map(getPizzaById);
-        res.render('cart.ejs', {pizzasDoCarrinho});
+        let pizzasNoCarrinho = req.session.pizzas.map(getPizzaById);
+
+        let usuarioLogado = (req.session.usuario !== undefined);
+
+        res.render('cart.ejs', {pizzasNoCarrinho, usuarioLogado});
     }
     //showCart: (req,res) =>{
-    //let pizzaDoCarrinho = req.session.pizza.map(id => pizzas.find(p => p.id == id))
+    //let pizzasNoCarrinho = req.session.pizza.map(id => pizzas.find(p => p.id == id))
     //}
 }

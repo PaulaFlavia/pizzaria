@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pizzaria Fantástica></title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+
+  <body>
+    <link rel="stylesheet" href="/css/entrar.css" />
+
+    <main>
+      <form method="POST" action="/usuarios/login" id="formLogin">
+        <h2>Faça Login</h2>
+        <label>
+          <span>E-mail:</span>
+          <input type="email" name="email" />
+        </label>
+        <label>
+          <span>Senha:</span>
+          <input type="password" name="senha" />
+        </label>
+        <div class="controles">
+          <button type="submit">Entrar</button>
+        </div>
+      </form>
+
+      <form method="POST" action="/usuarios/add" id="formCadastrar">
+        <h2>Cadastre-se</h2>
+        <label>
+          <span>E-mail:</span>
+          <input type="email" name="email" />
+        </label>
+        <label>
+          <span>Senha:</span>
+          <input type="password" name="senha" />
+        </label>
+        <label>
+          <span>Confirme Senha:</span>
+          <input type="password" name="confirmacao" />
+        </label>
+        <label>
+          <span>Endereço:</span>
+          <input type="text" name="endereco" />
+        </label>
+        <div class="controles">
+          <button type="submit">Cadastrar</button>
+        </div>
+        <% if(erroNoCadastro){ %>
+        <div class="erro">
+          Falha ao cadastrar usuário. Verifique se a senha e a confirmação
+          conferem.
+        </div>
+        <% } %>
+      </form>
+    </main>
+  </body>
+</html>
+
+<!--
+    Criar a rota post /usuarios/add
+Fazer com que a rota encaminhe a req para UsuariosController.add
+
+Criar a função UsuariosController.add...
+Fazer com que a função add:
+    - Crie um usuário dentro de um arquivo usuarios.json
+    - Cria a req.session.usuario
+    - Direciona o usuario para o endereço /pizzas ou /pizzas/cart
+    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    Criar a rota post para /usuarios/login
+    Fazer com que a rota encaminhe a req para UsuariosController.login
+    Fazer com que a função login:
+        - Verificar se usuário e senha conferem
+        - Caso não esteja ok, voltar para tela de login com erro
+        - Caso esteja ok,
+            + criar a session req.session.usuario 
+            + direcionar o usuário para o endereço /pizzas ou /pizzas/cart
+-->

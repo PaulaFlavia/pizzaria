@@ -1,0 +1,16 @@
+[
+    {
+        "email": "john@doe.com",
+        "senha": "$2b$10$k.I.DmQu7ml0SSoP1wLNseEhtNHDSyzMBtfIvMbpre/8vM1l2Kv2e",
+        "enderecos": [
+            "Rua 09, lote 21"
+        ]
+    },
+    {
+        "email": "johndoe@mail.com",
+        "senha": "$2b$10$3be.dq/b9Kv25CNoSqkrgeF2K56/VYokVjh0Tfp6y/1DQREnVpjb6",
+        "enderecos": [
+            "rua 9 ;21"
+        ]
+    }
+]
